@@ -7,13 +7,27 @@
 
 #include "../../../lv_drv_conf.h"
 #include "../../../lvgl/lvgl.h"
+#if ENABLE_GIAC == 1
+#include <giac/config.h>
+#include <giac/gen.h>
+#include <giac/giac.h>
+#endif
 // #include "../../lv_demo.h"
 
 // #ifdef __cplusplus
 // }
 // #endif
 
-void create_graph(void);
+#if ENABLE_GIAC == 1
+#define CREATE_GRAPH(context) create_graph(context)
+#define DEFINE_GRAPH void create_graph(giac::context& ctx)
+#else
+#define CREATE_GRAPH(context) create_graph()
+#define DEFINE_GRAPH void create_graph(void)
+#endif
+
+
+DEFINE_GRAPH;
 
 
 

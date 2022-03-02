@@ -61,8 +61,12 @@ static void calc_init(void);
 
 int main(void)
 {
+    #if ENABLE_GIAC == 1
+    giac::context ctx;
+    #endif
     calc_init();
-    create_graph();
+    //create_graph(ctx);
+    CREATE_GRAPH(ctx);
     //lv_demo_calculator::createDemo();
 
     /*Handle LitlevGL tasks (tickless mode)*/

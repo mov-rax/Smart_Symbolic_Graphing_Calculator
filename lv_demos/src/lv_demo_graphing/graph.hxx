@@ -18,12 +18,20 @@
 #include <giac/config.h>
 #include <giac/gen.h>
 #include <giac/giac.h>
+
+#define GRAPH_CONSTRUCTOR Graph(lv_obj_t* parent, giac::context& ctx)
+#define GRAPH_CONSTRUCTOR_INIT : ctx(ctx)
+#else
+#define GRAPH_CONSTRUCTOR Graph(lv_obj_t* parent)
+#define GRAPH_CONSTRUCTOR_INIT 
 #endif
 
 #if ENABLE_WINDOWS == 1
 #define MONITOR_HOR_RES 320
 #define MONITOR_VER_RES 240
 #endif
+
+
 
 namespace graphing {
 
@@ -100,7 +108,7 @@ namespace graphing {
         double VIEWPORT_HYP;
 
         #if ENABLE_GIAC == 1
-        giac::context ctx;
+        giac::context& ctx;
         #endif
         
         Point offset;
@@ -114,7 +122,8 @@ namespace graphing {
         std::vector<Plot> plot_list;
         int current_function_number = 1; // defaults to 1
     public:
-        Graph(lv_obj_t* parent);
+        GRAPH_CONSTRUCTOR;
+        
         //Graph(lv_obj_t* parent, lv_obj_t* function_button);
 
         void translate_center(Point vec){

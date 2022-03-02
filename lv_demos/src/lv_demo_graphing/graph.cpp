@@ -21,7 +21,7 @@ namespace graphing {
         last_time = lv_tick_get();
     }
 
-    Graph::Graph(lv_obj_t* parent){
+    Graph::GRAPH_CONSTRUCTOR GRAPH_CONSTRUCTOR_INIT{
         offset = Point(VIEWPORT_WIDTH/2, -VIEWPORT_HEIGHT/2);
         scale = CREATE_MPF("1");
         VIEWPORT_HYP = calculate_hyp(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
